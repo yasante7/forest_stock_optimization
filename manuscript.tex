@@ -1,0 +1,88 @@
+\documentclass[12pt,a4paper]{article}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{setspace}
+\usepackage[hidelinks]{hyperref}
+\usepackage{natbib}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{multirow}
+\usepackage{enumitem}
+
+% Formatting
+\doublespacing
+\setlength{\parindent}{0.5in}
+\setlength{\parskip}{0pt}
+
+% Citation style
+\bibliographystyle{apalike}
+\citestyle{authoryear}
+
+% Title information
+\title{\textbf{Forest Management Under Carbon Constraints: \\
+A Dynamic Optimization Analysis for Ghana}}
+
+\author{
+    % Add author names here as needed
+}
+
+\date{\today}
+
+% Custom commands
+\newcommand{\Mg}{{\text{Mg}}}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Ghana experienced a 16.1\% decline in tree cover between 2001 and 2024, losing 1.19 million hectares to agricultural expansion—predominantly cocoa cultivation. This paper develops a dynamic optimization model to assess optimal forest management under competing economic pressures: agricultural returns, carbon emissions, ecosystem services, and reforestation costs. We formulate deforestation and reforestation as decision variables within a 20-year finite-horizon problem where forest stock evolves according to logistic growth tempered by human intervention. Using Global Forest Watch data combined with economic parameters calibrated to Ghana-specific conditions, we solve for optimal trajectories via Sequential Least Squares Programming. Results indicate that current deforestation rates (58,000 ha/year) exceed social optimum (31,200 ha/year) by approximately 75\%, reflecting market failure in valuing carbon and ecosystem services. Sensitivity analysis reveals that carbon prices must exceed \$28/Mg CO$_2$e to induce substantial behavioral change—well above current voluntary market rates (\$12-\$20/Mg) but below compliance market prices (\$85/Mg in EU ETS). Agricultural intensification emerges as the most cost-effective intervention; closing half of Ghana's cocoa yield gap would reduce land expansion pressure equivalent to optimal reforestation targets. Policy recommendations emphasize integrated approaches: strengthen enforcement through community forest management, invest in agricultural productivity improvements, develop simplified carbon credit protocols, and implement spatially differentiated land-use zoning. The economic case for intervention is compelling—benefit-cost ratios exceed 7:1—but political economy constraints limit implementation. We conclude that technical solutions exist; mobilizing political will remains the binding constraint on forest conservation outcomes.
+\end{abstract}
+
+\vspace{0.3in}
+\noindent \textbf{Keywords:} deforestation, dynamic optimization, carbon pricing, forest management, Ghana, cocoa agriculture, REDD+
+
+\vspace{0.2in}
+\noindent \textbf{JEL Codes:} Q23, Q24, Q54, Q58
+
+\clearpage
+
+\tableofcontents
+\clearpage
+
+% Include sections
+\input{sections/01_introduction.tex}
+\clearpage
+
+\input{sections/02_literature.tex}
+\clearpage
+
+\input{sections/03_methodology.tex}
+\clearpage
+
+\input{sections/04_results.tex}
+\clearpage
+
+\input{sections/05_discussion.tex}
+\clearpage
+
+\input{sections/06_conclusion.tex}
+\clearpage
+
+% References
+\bibliography{references}
+
+% Appendices
+\clearpage
+\input{sections/appendix.tex}
+
+\end{document}

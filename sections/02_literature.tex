@@ -1,0 +1,47 @@
+\section{Literature Review}
+
+\subsection{Deforestation Drivers in Tropical Contexts}
+
+Agricultural expansion drives most tropical deforestation, but the mechanisms vary. \citet{hosonuma2012assessment} distinguish between direct drivers (land clearing for crops or pasture) and underlying causes (commodity prices, population pressure, weak governance). This taxonomy proves essential; policies targeting symptoms rarely address root causes. In West Africa specifically, cocoa cultivation emerges as the primary culprit \citep{kongsager2021drivers}, though the story resists oversimplification. Smallholder farmers operating within informal land tenure systems face incentives that differ markedly from industrial plantation operators \citep{curtis2018classifying}.
+
+\citet{geist2002proximate} conducted a meta-analysis across 152 case studies, isolating common patterns while respecting regional variation. Their findings suggest infrastructure development precedes agricultural encroachment—roads open forests to settlers, who then convert land incrementally. Ghana fits this pattern partially. The Eastern and Ashanti regions, which experienced the steepest forest losses between 2001 and 2024, also saw road network expansion during the same period. Yet correlation is not causation; cocoa prices spiked during this interval as well.
+
+A strand of literature focuses on the permanence of deforestation. \citet{rudel2005tropical} distinguish between "frontier deforestation" (initial clearing of primary forests) and "forest transitions" (where reforestation eventually exceeds clearing). Ghana appears caught between these stages: primary forests continue to diminish while secondary growth increases in previously degraded areas. The net effect remains negative, but the trajectory might be bending.
+
+\subsection{Economic Modeling of Forest Management}
+
+Dynamic optimization provides the standard framework for forest management decisions. \citet{faustmann1849berechnung} established the foundational model—maximizing the present value of timber harvests subject to biological growth constraints—which economists have extended in multiple directions. \citet{hartman1976harvesting} incorporated amenity values; \citet{van1999optimal} added carbon sequestration benefits.
+
+Recent applications to tropical forests grapple with the agriculture-conservation trade-off. \citet{barbier2004valuing} estimated the opportunity cost of forest conservation in Mexico by comparing agricultural rents to ecosystem service values, finding that forests generate higher long-run economic value but lower immediate returns—precisely the temporal mismatch that drives deforestation. \citet{busch2012structuring} extended this logic to REDD+ program design, calculating minimum carbon prices necessary to compensate landowners for foregone agricultural profits.
+
+The models share a common structure: forest stock evolves according to a biological growth function (often logistic), human activities (harvest, clearing, planting) alter this trajectory, and an objective function aggregates benefits and costs discounted over time. Solution methods vary. Small-scale problems yield to analytical techniques; larger state spaces require numerical optimization. \citet{mcdonald2019forest} solved a 50-year horizon model for Indonesian forests using sequential quadratic programming, identifying threshold carbon prices (\$30-\$45/Mg CO$_2$e) where conservation becomes economically rational.
+
+What these models often omit: heterogeneity in deforestation drivers. They treat forest clearing as a homogeneous activity, ignoring differences between industrial agriculture, smallholder farming, logging, and infrastructure development. \citet{curtis2018classifying} demonstrated that driver-specific approaches yield more accurate predictions, since different drivers respond to different policy levers. Cocoa farmers react to commodity prices and land tenure security; industrial plantations respond to corporate sustainability commitments and export regulations.
+
+\subsection{Carbon Pricing and Forest Conservation}
+
+Carbon markets aim to internalize the climate externality of deforestation. The logic appears straightforward: assign a price to carbon emissions, making forest clearing costly; offer credits for sequestration, making reforestation profitable. Implementation proves messier. \citet{angelsen2017mechanisms} evaluated REDD+ programs across 15 countries, finding modest impacts—carbon payments reduced deforestation by 5-10\% where implemented, far below program targets.
+
+Why the gap? Several mechanisms explain underperformance. First, carbon prices remain low. Voluntary carbon markets trade forest offsets at \$5-\$15 per Mg CO$_2$e, well below the \$40-\$80 range that \citet{stern2007economics} estimates as necessary for meaningful behavioral change. Second, leakage undermines local success; protecting one forest often displaces clearing elsewhere. Third, additionality proves difficult to verify—would the forest have been conserved anyway?
+
+\citet{busch2019forest} calculated implicit carbon prices embedded in actual deforestation rates across 51 tropical countries. The median stood at \$3/Mg, suggesting that markets value standing forests far below their climate service contribution. Ghana's implicit price fell even lower, around \$1.50/Mg, consistent with weak enforcement of conservation policies and limited participation in international carbon markets.
+
+The literature identifies a critical threshold: carbon prices must exceed agricultural opportunity costs to induce conservation. For cocoa cultivation in Ghana, \citet{kroeger2017forest} estimated opportunity costs between \$350-\$500 per hectare per year. Translating this to carbon terms requires assumptions about emission factors—roughly 400 Mg CO$_2$e per hectare for primary forest conversion. This implies a minimum carbon price of \$0.875-\$1.25 per Mg to break even on the intensive margin, but higher prices (\$35-\$50/Mg) to shift extensive margin decisions about which parcels to clear.
+
+\subsection{Ghana-Specific Forest Dynamics}
+
+Ghana's deforestation trajectory deviates from regional patterns. \citet{keenan2015dynamics} documented forest transitions in 50 countries; Ghana began transitioning in the 1990s—secondary forest growth increased—but reversed course after 2005. \citet{hansen2013high} provided the first high-resolution assessment, revealing that Ghana lost 33.7\% of its tree cover between 2001 and 2013, the highest rate in West Africa.
+
+What explains this reversal? The cocoa sector expanded rapidly after trade liberalization in the late 1990s. \citet{kroeger2017forest} linked cocoa price increases directly to forest loss using district-level panel data, estimating an elasticity of 0.15—a 10\% cocoa price increase generates 1.5\% additional deforestation. This relationship strengthened after 2010, coinciding with reforms that increased farmer revenue shares.
+
+Infrastructure development accelerated deforestation as well. The Eastern Corridor Road, completed in 2018, opened previously inaccessible forest areas to cultivation. Satellite imagery shows deforestation clustering along newly paved segments—a spatial pattern consistent with the access hypothesis \citep{pfaff1999roads}.
+
+Policy responses oscillated. Ghana joined REDD+ in 2008, implementing pilot programs in three forest reserves. Initial results appeared promising: protected areas experienced 30\% less deforestation than control regions \citep{siikamaki2012global}. But enforcement weakened after 2015, coinciding with budget constraints and competing development priorities. By 2020, deforestation rates in "protected" reserves matched those in unprotected areas, indicating institutional failure rather than design flaws.
+
+Recent studies examine reforestation potential. \citet{acheampong2019deforestation} surveyed degraded forest landscapes, identifying 1.3 million hectares suitable for restoration—roughly equal to total forest loss since 2001. Yet barriers constrain implementation: land tenure uncertainty, insufficient financing, and poor seedling survival rates (often below 40\%) limit program effectiveness. Without addressing these structural constraints, reforestation targets remain aspirational.
+
+\subsection{Gaps in the Literature}
+
+While existing research documents Ghana's deforestation crisis and explores policy options conceptually, few studies integrate empirical patterns into explicit optimization frameworks. The models remain either purely theoretical (assuming generic parameter values) or purely empirical (describing patterns without normative analysis). We bridge this gap by calibrating a dynamic optimization model using Ghana-specific data on deforestation drivers, carbon emissions, and economic returns. This approach generates policy-relevant predictions about how carbon pricing and agricultural policies interact to shape optimal forest management.
+
+Previous optimization studies for Ghana relied on outdated data, typically ending in 2015 or earlier. Our analysis extends through 2024, capturing recent acceleration in tree cover loss—a critical update given that the past decade witnessed both intensified agricultural expansion and weakening policy enforcement. The extended time series allows us to model trends rather than static snapshots, improving forecast accuracy.

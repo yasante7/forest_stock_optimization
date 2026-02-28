@@ -1,0 +1,11 @@
+Ghana Forest Loss Summary Statistics (2001-2024)
+==================================================
+
+Total forest loss: 1,752,040 ha
+Average annual loss: 73,002 ha
+Standard deviation: 42,234 ha
+Max annual loss: 151,530 ha (year 2018)
+Min annual loss: 17,628 ha (year 2004)
+
+Total CO2 emissions: 1007.8 Million Mg
+Average emissions per ha: 536.1 Mg CO2e/ha

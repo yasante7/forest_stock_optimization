@@ -1,0 +1,43 @@
+\contentsline {section}{\numberline {1}Introduction}{5}{section.1}%
+\contentsline {section}{\numberline {2}Literature Review}{8}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Deforestation Drivers in Tropical Contexts}{8}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Economic Modeling of Forest Management}{8}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Carbon Pricing and Forest Conservation}{9}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Ghana-Specific Forest Dynamics}{10}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}Gaps in the Literature}{11}{subsection.2.5}%
+\contentsline {section}{\numberline {3}Methodology}{13}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Data Sources and Processing}{13}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Descriptive Analysis}{15}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Dynamic Optimization Model}{15}{subsection.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.1}Forest Dynamics}{16}{subsubsection.3.3.1}%
+\contentsline {subsubsection}{\numberline {3.3.2}Objective Function}{16}{subsubsection.3.3.2}%
+\contentsline {subsubsection}{\numberline {3.3.3}Constraints}{17}{subsubsection.3.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.4}Solution Method}{18}{subsubsection.3.3.4}%
+\contentsline {subsubsection}{\numberline {3.3.5}Model Limitations}{18}{subsubsection.3.3.5}%
+\contentsline {section}{\numberline {4}Results}{20}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Descriptive Patterns: Two Decades of Deforestation}{20}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Regional Heterogeneity}{21}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Driver Attribution}{22}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Tree Cover Gain: Insufficient to Compensate}{24}{subsection.4.4}%
+\contentsline {subsection}{\numberline {4.5}Optimization Results: Baseline Scenario}{25}{subsection.4.5}%
+\contentsline {subsection}{\numberline {4.6}Sensitivity Analysis: Carbon Pricing}{30}{subsection.4.6}%
+\contentsline {subsection}{\numberline {4.7}Sensitivity Analysis: Discount Rate}{31}{subsection.4.7}%
+\contentsline {subsection}{\numberline {4.8}Counterfactual: Business-as-usual Projection}{32}{subsection.4.8}%
+\contentsline {subsection}{\numberline {4.9}Robustness Checks}{34}{subsection.4.9}%
+\contentsline {section}{\numberline {5}Discussion and Policy Implications}{36}{section.5}%
+\contentsline {subsection}{\numberline {5.1}The Time Horizon Imperative}{36}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Regulatory Approaches: Enforcement Constraints}{36}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Carbon Pricing: Threshold Effects and Market Access}{38}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.4}Agricultural Intensification: Relieving Land Pressure}{38}{subsection.5.4}%
+\contentsline {subsection}{\numberline {5.5}Reforestation at Scale: Institutional Bottlenecks}{39}{subsection.5.5}%
+\contentsline {subsection}{\numberline {5.6}Threshold Dynamics and Irreversibility}{40}{subsection.5.6}%
+\contentsline {subsection}{\numberline {5.7}Political Economy and Implementation Feasibility}{41}{subsection.5.7}%
+\contentsline {subsection}{\numberline {5.8}Integrated Policy Framework}{42}{subsection.5.8}%
+\contentsline {section}{\numberline {6}Conclusion}{43}{section.6}%
+\contentsline {section}{\numberline {A}Supplementary Figures and Tables}{49}{appendix.A}%
+\contentsline {subsection}{\numberline {A.1}Temporal and Emissions Analysis}{49}{subsection.A.1}%
+\contentsline {subsection}{\numberline {A.2}Regional Trends and Spatial Patterns}{52}{subsection.A.2}%
+\contentsline {subsection}{\numberline {A.3}Temporal-Spatial Dynamics}{57}{subsection.A.3}%
+\contentsline {subsection}{\numberline {A.4}Sensitivity Analysis: Carbon Pricing and Discount Rates}{60}{subsection.A.4}%
+\contentsline {subsection}{\numberline {A.5}Detailed Optimization Results}{61}{subsection.A.5}%
+\contentsline {subsection}{\numberline {A.6}Supplementary Data Tables}{62}{subsection.A.6}%

@@ -1,0 +1,15 @@
+metric,value
+Initial Forest Stock (million ha),6.20
+Final Forest Stock (million ha),9.50
+Carrying Capacity (million ha),9.50
+MSY Stock Level (million ha),4.75
+Average Annual Deforestation (1000 ha/year),0.00
+Average Annual Reforestation (1000 ha/year),17.33
+Average Net Loss Rate (1000 ha/year),-17.32
+Total Net Change (million ha),+3.30
+Percent Change from Initial (%),+53.2
+Present Value of Net Benefits (billion USD),43.89
+Time Horizon (years),100
+Discount Rate (%),3.0
+Carbon Price (USD/Mg CO2e),20
+Growth Rate (%),5.0

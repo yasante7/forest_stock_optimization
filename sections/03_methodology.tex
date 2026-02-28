@@ -1,0 +1,125 @@
+\section{Methodology}
+
+\subsection{Data Sources and Processing}
+
+We rely primarily on Global Forest Watch (GFW) data, which synthesizes Landsat satellite imagery at 30-meter resolution into annual tree cover change estimates \citep{hansen2013high}. GFW defines "tree cover" as canopy cover exceeding 30\% density; "tree cover loss" captures any stand-replacement disturbance, whether permanent (conversion to agriculture) or temporary (selective logging followed by regeneration). This distinction matters—our deforestation estimates include some reversible disturbances, potentially overstating permanent forest loss.
+
+The dataset spans 2001 to 2024, though 2024 figures remain provisional pending validation against ground-truth data. For Ghana, GFW disaggregates losses across ten administrative regions: Ashanti, Bono, Bono East, Central, Eastern, Greater Accra, Northern, Savannah, Western, and Western North. Regional breakdowns allow spatial analysis but introduce measurement error; pixel classification at region boundaries suffers from edge effects.
+
+Driver attribution comes from \citet{curtis2018classifying}, who applied machine learning algorithms to distinguish between five primary drivers: commodity-driven deforestation (industrial agriculture), shifting cultivation (smallholder forest-fallow rotation), forestry (managed timber operations), wildfire, and urbanization. The algorithm achieves 83\% classification accuracy in tropical contexts, validated against field surveys. For Ghana, the classification assigns 89.7\% of deforestation to commodity-driven agriculture—overwhelmingly cocoa cultivation based on regional crop statistics.
+
+Carbon emission estimates derive from GFW's carbon flux model, which combines aboveground biomass maps from \citet{baccini2012estimated} with IPCC Tier 1 emission factors adjusted for tropical moist forest types. The model estimates that each hectare of tree cover loss in Ghana releases approximately 410 Mg CO$_2$e on average, though this varies spatially. Primary forests emit 550-650 Mg/ha upon clearing; degraded secondary forests release 200-300 Mg/ha. We use aggregate emission figures due to data limitations—spatially explicit biomass maps for Ghana pre-2000 do not exist at sufficient resolution.
+
+Reforestation data comes from two sources. Tree cover gain estimates (2000-2020) derive from Landsat imagery analyzed by \citet{song2018massive}, who identified new canopy cover in areas previously classified as non-forest. This captures both natural regeneration and planted forests but cannot distinguish between them. We supplement with Ghana Forestry Commission records on plantation establishment, though these records suffer from reporting inconsistencies—claimed planted areas often exceed verified survival rates by a factor of two.
+
+Economic parameters require careful justification:
+
+\textbf{Agricultural revenue} (\$400/ha/year): We use average cocoa yields (500 kg/ha) multiplied by export prices (\$2.20/kg farmgate, averaged over 2015-2024) minus variable production costs (\$700/ha), amortized across typical stand lifespan (25 years). This generates annual equivalent revenue of \$410/ha; we round to \$400 to reflect risk adjustment.
+
+\textbf{Reforestation costs} (\$2,000/ha): Ghana Forestry Commission budget documents report \$1,800-\$2,200/ha for site preparation, seedling procurement, planting labor, and three-year maintenance. We use the midpoint. Note that these are \textit{program costs}, not farmer costs; subsidies cover most expenses, explaining why actual reforestation lags behind stated targets.
+
+\textbf{Carbon price} (\$20/Mg CO$_2$e): The voluntary carbon market traded forest offsets at \$12-\$28/Mg during 2023-2024. We use \$20 as the baseline, recognizing this exceeds Ghana's implicit carbon price (\$1.50/Mg observed in actual behavior) but represents what international carbon finance might provide. Sensitivity analysis explores \$10-\$50 range.
+
+\textbf{Amenity value} (\$164/ha/year): This combines watershed protection (\$42/ha, based on water treatment cost savings documented by \citet{amoah2021assessing}), erosion prevention (\$35/ha), biodiversity value (\$51/ha, estimated via contingent valuation), and local climate regulation (\$36/ha). These are minimum estimates; total ecosystem service values likely exceed \$300/ha, but we use only directly quantifiable components.
+
+\textbf{Discount rate} (3\%): Ghana's real interest rate averaged 5.2\% over 2015-2024, but social discount rates typically run lower than market rates. We follow \citet{stern2007economics} in using 3\%, while acknowledging this choice materially affects results—higher discount rates favor immediate extraction.
+
+\subsection{Descriptive Analysis}
+
+Before optimization, we document empirical patterns. Annual deforestation rates exhibit strong time trends and regional heterogeneity. We estimate:
+
+\begin{equation}
+\text{Loss}_{rt} = \alpha + \beta_r + \gamma t + \varepsilon_{rt}
+\end{equation}
+
+where $\text{Loss}_{rt}$ measures hectares lost in region $r$ during year $t$, $\beta_r$ captures region fixed effects, and $\gamma$ estimates the national trend. This decomposition separates persistent regional differences (some regions contain more forest) from dynamic changes (acceleration or deceleration).
+
+Driver attribution receives particular attention. We calculate each driver's contribution to total deforestation and test whether driver composition shifted over time:
+
+\begin{equation}
+\text{Share}_{dt} = \frac{\text{Loss}_{\text{driver}=d, t}}{\sum_{d'} \text{Loss}_{\text{driver}=d', t}}
+\end{equation}
+
+If $\text{Share}_{dt}$ changes significantly, policies targeting specific drivers should adjust accordingly. For instance, if shifting cultivation declines while commodity agriculture expands, focusing anti-deforestation efforts on smallholder education becomes less effective than regulating industrial plantations.
+
+\subsection{Dynamic Optimization Model}
+
+We formulate forest management as a discrete-time, finite-horizon optimal control problem. The state variable is forest stock $X_t$ (hectares); controls are deforestation $Y_t$ (hectares cleared) and reforestation $G_t$ (hectares planted). The time horizon spans $T = 20$ years, chosen to match Ghana's National Forest Plantation Development Strategy (2025-2045).
+
+\subsubsection{Forest Dynamics}
+
+Forest stock evolves according to:
+
+\begin{equation}
+X_{t+1} = X_t + rX_t \left( 1 - \frac{X_t}{K} \right) - Y_t + G_t
+\end{equation}
+
+The logistic growth term $rX_t(1 - X_t/K)$ captures natural regeneration, where $r = 0.05$ (5\% annual growth rate, consistent with \citet{chazdon2016carbon} estimates for tropical secondary forests) and $K = 9.5$ million hectares (estimated historical maximum forest extent based on soil surveys). This growth function implies that forests far below carrying capacity regenerate faster—a biological reality that economic models must respect.
+
+Initial conditions matter. We set $X_0 = 6.2$ million hectares, the 2024 forest extent from GFW data. Starting below carrying capacity means natural regeneration contributes approximately 157,000 ha/year initially, declining as $X_t$ approaches $K$.
+
+\subsubsection{Objective Function}
+
+The social planner maximizes present value of net benefits:
+
+\begin{equation}
+\max_{\{Y_t, G_t\}_{t=0}^{T-1}} \quad \sum_{t=0}^{T-1} \frac{1}{(1+\delta)^t} \left[ v_a X_t + aY_t - p_c eY_t - c_r G_t + p_c sG_t \right] + \frac{V_T(X_T)}{(1+\delta)^T}
+\end{equation}
+
+Each component requires interpretation:
+
+\begin{itemize}
+    \item $v_a X_t$: Flow of ecosystem services from standing forests, proportional to forest area. This assumes linear returns; reality likely exhibits diminishing returns (doubling forest area does not double watershed protection), but data limitations prevent estimating nonlinear functions.
+
+    \item $aY_t$: Agricultural revenue from cleared land. We assume cleared land immediately generates agricultural income, which holds for cocoa (productive within 2-3 years) but overstates returns for other crops with longer maturation periods.
+
+    \item $p_c eY_t$: Carbon cost of deforestation. Parameter $e = 410$ Mg CO$_2$e/ha represents average emission factor. Multiplying by carbon price $p_c$ converts physical emissions to economic damages. Critically, this term assumes emitters face the full carbon cost—not true under current policy but represents a carbon tax scenario.
+
+    \item $c_r G_t$: Direct cost of reforestation programs. This captures only implementation costs; we do not model opportunity costs (land that could be used for agriculture), effectively assuming reforestation occurs on marginal land unsuitable for cultivation.
+
+    \item $p_c sG_t$: Carbon sequestration benefit from reforested land. Parameter $s = 1.5$ Mg CO$_2$e/ha/year represents annual carbon uptake by young regenerating forests, based on \citet{poorter2016biomass} growth curves for tropical plantations. This understates long-run sequestration potential (mature forests continue accumulating carbon at 0.5-1.0 Mg/ha/year) but matches the 20-year horizon.
+\end{itemize}
+
+The terminal value $V_T(X_T)$ represents forest value beyond the planning horizon:
+
+\begin{equation}
+V_T(X_T) = \left( v_a + \frac{p_c s}{\delta} \right) X_T
+\end{equation}
+
+This formulation capitalizes the perpetual flow of amenity services ($v_a$) and carbon sequestration benefits, discounted at rate $\delta$. It assumes forest stock remains constant after period $T$, which is conservative—if regeneration continues, terminal value exceeds our estimate.
+
+\subsubsection{Constraints}
+
+Biological and accounting identities impose constraints:
+
+\begin{align}
+0 &\leq Y_t \leq X_t && \text{(cannot deforest more than exists)} \label{eq:constr_y} \\
+0 &\leq G_t \leq K - X_t && \text{(cannot exceed carrying capacity)} \label{eq:constr_g} \\
+X_t &\geq 0 \quad \forall t && \text{(non-negativity)} \label{eq:constr_x}
+\end{align}
+
+Constraint (\ref{eq:constr_y}) binds when optimal policy prescribes complete deforestation; constraint (\ref{eq:constr_g}) binds if optimal reforestation would overshoot carrying capacity. In practice, neither binds under reasonable parameter values—complete deforestation destroys future ecosystem services, and reforesting to capacity within 100 years exceeds budget feasibility.
+
+The non-negativity constraint (\ref{eq:constr_x}) matters more. The optimization algorithm occasionally proposes negative forest stock in intermediate iterations before converging; enforcing this constraint prevents nonsensical solutions.
+
+\subsubsection{Solution Method}
+
+We solve the model using Sequential Least Squares Programming (SLSQP), implemented in Python's \texttt{scipy.optimize.minimize} function. SLSQP handles nonlinear objectives and constraints efficiently for problems of this scale (40 decision variables: $Y_t$ and $G_t$ for $t = 0, \ldots, 19$).
+
+The algorithm requires an initial guess. We set $Y_0 = 50,000$ ha/year (roughly the 2020-2024 average) and $G_0 = 10,000$ ha/year (matching recent reforestation rates), then hold these constant across all periods as the starting point. Convergence typically occurs within 50-100 iterations, confirmed by checking that gradient norm falls below $10^{-6}$.
+
+Computational time on a standard laptop (Intel i7, 16GB RAM) runs under 5 seconds per optimization. This allows rapid sensitivity analysis—we solve the model across a grid of carbon prices and discount rates to map the policy space.
+
+\subsubsection{Model Limitations}
+
+Several simplifications warrant acknowledgment. First, we assume a single representative agent (the social planner) rather than modeling farmer-level decisions explicitly. This abstracts away heterogeneity in land tenure, access to credit, and risk preferences—factors that demonstrably affect deforestation behavior \citep{angelsen2001agricultural}.
+
+Second, we treat forest as homogeneous. Reality distinguishes primary forests (high biodiversity, high carbon stock) from secondary regeneration (lower on both dimensions). Aggregating these into a single state variable misses important trade-offs; clearing secondary forest imposes smaller environmental costs than clearing primary forest. Data limitations prevent estimating separate dynamics for each forest type at national scale.
+
+Third, the model ignores spatial dimensions. Optimal policy likely varies by region—high agricultural potential areas should arguably experience more conversion than marginal lands. Our aggregate approach finds a single national-level policy, which could be Pareto-improved through spatial differentiation.
+
+Fourth, we assume perfect enforcement. Setting carbon price $p_c = \$20$ implicitly assumes farmers face this price when making clearing decisions. But without enforcement mechanisms, announcements that carbon has value change nothing. The model identifies \textit{optimal} policies, not necessarily \textit{implementable} ones.
+
+Finally, the 20-year horizon truncates long-run dynamics. Forests take 60-80 years to reach maturity; carbon sequestration benefits accrue over centuries. Our terminal value function attempts to capture this, but short horizons systematically bias results toward extraction.
+
+Despite these limitations, the model generates useful insights. It structures thinking about trade-offs, quantifies threshold conditions under which policies shift optimal behavior, and provides a framework for comparing alternative interventions. Perfection is not required; improvement over ad hoc decision-making suffices.
