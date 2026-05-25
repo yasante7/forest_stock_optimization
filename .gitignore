@@ -1,0 +1,80 @@
+# --- Project Specific ---
+# Ignore all markdown except README
+*.md
+!README.md
+
+# Ignore root-level images and PDFs (likely artifacts/samples)
+/*.pdf
+/*.png
+/*.jpg
+/*.txt
+!references.bib
+
+# --- LaTeX ---
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.synctex*
+*.toc
+*.out
+*.lof
+*.lot
+*.run.xml
+*.bcf
+*.gz
+*.pdf
+*.dvi
+*.ps
+*.thm
+*.nav
+*.snm
+*.vrb
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.synctex(busy)
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+ENV/
+env/
+build/
+dist/
+*.egg-info/
+
+# --- Operating Systems ---
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# --- IDEs/Editors ---
+.vscode/
+.idea/
+*.swp
+*.bak
+*.tmp
+.sublime-project
+.sublime-workspace
+
+# --- Git ---
+.git/
