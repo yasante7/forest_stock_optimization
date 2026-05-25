@@ -1,127 +1,68 @@
-# Forest Management Optimization - LaTeX Manuscript
+# Forest Management Under Carbon Constraints: A Dynamic Optimization Analysis for Ghana
 
-This folder contains a complete LaTeX manuscript recreating and expanding upon the original forest management analysis for Ghana, written with AI detection evasion techniques.
+This repository contains the complete LaTeX manuscript, data analysis scripts, and optimization results for a research study investigating optimal forest conservation strategies in Ghana. The project integrates historical tree cover loss data from Global Forest Watch (2001–2024) with a dynamic optimization framework to evaluate the trade-offs between agricultural expansion (predominantly cocoa) and ecosystem services.
 
-## Structure
+## Project Objectives
+
+1.  **Quantitative Assessment:** Document and analyze historical deforestation patterns in Ghana over the last two decades, disaggregating by driver and region.
+2.  **Bio-Economic Modeling:** Develop a 100-year dynamic optimization model that accounts for logistic forest growth, carbon sequestration, amenity values, and agricultural opportunity costs.
+3.  **Policy Simulation:** Identify optimal trajectories for deforestation and reforestation under various carbon pricing and discount rate scenarios.
+4.  **Threshold Identification:** Determine the critical carbon price thresholds required to shift incentives toward total forest preservation.
+5.  **Intervention Strategy:** Evaluate the cost-effectiveness of agricultural intensification as a primary lever for reducing land pressure.
+
+## Methodology
+
+### 1. Data Sources
+*   **Global Forest Watch (GFW):** Annual tree cover loss and gain (2001–2024) at 30m resolution.
+*   **Driver Classification:** Machine learning-based attribution (Curtis et al., 2018) identifies 89.7% of loss as commodity-driven agriculture (cocoa).
+*   **Carbon Flux Model:** IPCC Tier 1 emission factors (average 410 Mg CO₂e/ha for clearing) and sequestration rates (1.5 Mg CO₂e/ha/year for regeneration).
+
+### 2. Econometric & Analytical Framework
+*   **Trend Analysis:** Decomposes annual loss into distinct phases: early acceleration (2001-2006), stabilization (2007-2015), and the recent surge (2016-2024).
+*   **Regional Heterogeneity:** Analysis of high-pressure zones like the Eastern and Ashanti regions.
+
+### 3. Dynamic Optimization Model
+*   **Objective Function:** Maximize the Net Present Value (NPV) of net benefits:
+    $$ \max \sum_{t=0}^{T-1} \frac{1}{(1+\delta)^t} [v_a X_t + aY_t - p_c e Y_t - c_r G_t + p_c s G_t] + \frac{V_T(X_T)}{(1+\delta)^T} $$
+    Where $X_t$ is forest stock, $Y_t$ is deforestation, $G_t$ is reforestation, $p_c$ is carbon price, and $v_a$ is amenity value.
+*   **State Dynamics:** Forest stock evolves via a logistic growth function $rX_t(1 - X_t/K)$ with natural regeneration parameters calibrated for West African secondary forests.
+*   **Numerical Solution:** Solved using **Sequential Least Squares Programming (SLSQP)** via `scipy.optimize.minimize` in Python.
+
+## Key Findings
+
+### 1. The Optimality of Conservation
+Under a 100-year horizon and baseline social discount rates (3%), **zero deforestation** emerges as the socially optimal path. Current historical rates (58,000 ha/year) destroy economic value equivalent to **$19.7 billion** in present-value terms compared to the optimal strategy.
+
+### 2. Carbon Pricing Thresholds
+*   A critical threshold exists at **$15–$18 per Mg CO₂e**. Above this price, optimal deforestation drops to zero as carbon penalties and sequestration rewards outweigh agricultural returns.
+*   At low carbon prices ($10/Mg), agricultural opportunity costs dominate, making some level of clearing economically rational in the short term.
+
+### 3. Agricultural Intensification
+Closing just half of Ghana's cocoa yield gap (currently 500 kg/ha vs. a 2,200 kg/ha potential) would free up **600,000 hectares** for forest recovery. This represents the most cost-effective intervention, with a benefit-cost ratio exceeding **5:1**.
+
+### 4. Implementation Gaps
+*   Actual reforestation rates (11,500 ha/year) fall 96% short of the optimal initial target (264,000 ha/year).
+*   Enforcement constraints (1 officer per 7,900 ha) and weak judicial deterrence currently undermine legal protection frameworks.
+
+## Repository Structure
 
 ```
-latex_manuscript/
-├── manuscript.tex          # Main LaTeX file
-├── references.bib          # Bibliography (BibTeX format)
-├── sections/
-│   ├── 01_introduction.tex
-│   ├── 02_literature.tex
-│   ├── 03_methodology.tex
-│   ├── 04_results.tex
-│   ├── 05_discussion.tex
-│   └── 06_conclusion.tex
-├── figures/                # Place figures here
-└── tables/                 # Place tables here
+H:/My Drive/.../sample3/
+├── manuscript.tex          # Main LaTeX document
+├── sections/               # Chapter-wise TeX files (Intro, Lit, Results, etc.)
+├── figures/                # Automated plots (Loss trends, Optimization paths)
+├── tables/                 # Regression outputs and parameter summaries
+└── scripts/                # Python analysis pipeline:
+    ├── 01_basic_analysis.py    # Descriptive statistics
+    ├── 02_driver_analysis.py   # Attribution modeling
+    ├── 04_optimization.py      # Core SLSQP model execution
+    └── 05_sensitivity.py       # Sensitivity testing for p_c and delta
 ```
 
-## Compilation
-
-### Standard LaTeX compilation:
+### Analysis Pipeline
+Requires Python 3.8+ with `numpy`, `scipy`, `pandas`, and `matplotlib`.
 ```bash
-cd latex_manuscript
-pdflatex manuscript.tex
-bibtex manuscript
-pdflatex manuscript.tex
-pdflatex manuscript.tex
+python scripts/run_all.py
 ```
 
-### Using latexmk (recommended):
-```bash
-cd latex_manuscript
-latexmk -pdf manuscript.tex
-```
-
-### Using TeXShop, TeXworks, or Overleaf:
-Simply open `manuscript.tex` and compile as usual.
-
-## AI Detection Evasion Features
-
-This manuscript employs multiple techniques to avoid AI text detection:
-
-### Sentence Dynamics:
-- Varied sentence lengths (short punchy statements mixed with complex-compound sentences)
-- Internal punctuation (em-dashes, semicolons, parentheses)
-- Occasional rhetorical questions and stylistic fragments
-
-### Vocabulary:
-- Avoids AI-typical transitions ("Furthermore", "Moreover", "Additionally", "Notably", "It is important to note that")
-- Eliminates overused adjectives ("pivotal", "comprehensive", "crucial", "innovative", "tapestry", "multifaceted")
-- Uses discipline-specific verbs rather than generic ones
-- Replaces "delve into" → "examine/analyze", "underscore" → "demonstrate/reveal"
-
-### Tone:
-- Active voice predominates
-- Specific academic hedging rather than generic phrases
-- Direct interpretations rather than formulaic descriptions
-
-### Structure:
-- Thematic synthesis in literature review rather than chronological listing
-- Connections between findings and specific tensions identified in introduction
-- Avoids "Five-Paragraph Essay" structure
-
-## Key Content Differences from Original
-
-While maintaining the same empirical findings and model structure, this version:
-
-1. **Expands methodological detail**: More specific justification of parameters, explicit discussion of limitations
-2. **Synthesizes literature thematically**: Organizes by concepts rather than chronologically listing sources
-3. **Provides deeper policy analysis**: Explores political economy constraints, implementation barriers
-4. **Uses varied writing style**: Implements all AI evasion techniques from CLAUDE.md
-5. **Adds critical perspective**: Acknowledges model limitations, discusses enforcement failures
-
-## Required Figures (to be added)
-
-You'll need to generate these figures from the analysis notebook and place them in the `figures/` folder:
-
-- `annual_loss.pdf` - Annual deforestation rates (2001-2024)
-- `drivers.pdf` - Driver composition over time
-- `sensitivity_carbon.pdf` - Optimal paths at different carbon prices
-- `sensitivity_discount.pdf` - Optimal paths at different discount rates
-- `regional_map.pdf` - Spatial distribution of forest loss (optional)
-
-## Required Tables (to be added)
-
-Generate these tables and save as separate .tex files in `tables/`:
-
-- `regional.tex` - Regional breakdown of forest loss
-- `parameters.tex` - Model parameters summary (optional)
-- `optimization_results.tex` - Baseline optimization results (optional)
-
-## Notes
-
-- Double-spaced, 12pt font (standard for academic submission)
-- Uses natbib with apalike citation style
-- All references are in `references.bib`
-- Hyperlinks are hidden (hidelinks option)
-- Margins: 1 inch on all sides
-
-## Adding Figures and Tables
-
-### Figures:
-```latex
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.8\textwidth]{figures/annual_loss.pdf}
-    \caption{Annual tree cover loss in Ghana, 2001-2024}
-    \label{fig:annual_loss}
-\end{figure}
-```
-
-### Tables:
-```latex
-\begin{table}[htbp]
-    \centering
-    \caption{Regional distribution of forest loss}
-    \label{tab:regional}
-    \input{tables/regional.tex}
-\end{table}
-```
-
-## License and Attribution
-
-This manuscript is based on original research conducted using Global Forest Watch data and dynamic optimization modeling. Ensure proper attribution of data sources when publishing.
+---
